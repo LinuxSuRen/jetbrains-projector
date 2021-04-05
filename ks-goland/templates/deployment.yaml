@@ -25,9 +25,11 @@ spec:
           hostPath:
             path: /var/run/docker.sock
             type: ''
+        {{- if .Values.persistent.enabled }}
         - name: jetbrains-userdata
           persistentVolumeClaim:
-            claimName: jetbrains-userdata
+            claimName: {{ include "ks-goland.fullname" . }}-userdata
+        {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -43,7 +45,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8887
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -58,8 +60,10 @@ spec:
           volumeMounts:
             - name: docker
               mountPath: /var/run/docker.sock
+            {{- if .Values.persistent.enabled }}
             - name: jetbrains-userdata
               mountPath: /home/projector-user
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

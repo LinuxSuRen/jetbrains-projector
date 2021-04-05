@@ -1,0 +1,15 @@
+{{- if .Values.persistent.enabled -}}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ include "ks-goland.fullname" . }}-userdata
+  annotations:
+    volume.beta.kubernetes.io/storage-provisioner: openebs.io/local
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
+{{- end }}
