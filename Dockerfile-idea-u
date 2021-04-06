@@ -1,0 +1,17 @@
+FROM registry.jetbrains.team/p/prj/containers/projector-idea-u
+
+USER root
+
+RUN apt-get update
+RUN apt-get install vim curl wget git make default-jdk maven -y && \
+	curl -L https://github.com/linuxsuren/http-downloader/releases/latest/download/hd-linux-amd64.tar.gz | tar xzv && \
+	mv hd /usr/local/bin
+
+RUN hd install linuxsuren/ks && \
+	rm -rf ks-linux-amd64.tar.gz && \
+	hd install cli/cli && \
+	curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+	mv kubectl /usr/local/bin && \
+	chmod +x /usr/local/bin/kubectl
+
+USER projector-user
