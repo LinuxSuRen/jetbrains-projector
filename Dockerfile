@@ -7,8 +7,6 @@ FROM registry.jetbrains.team/p/prj/containers/projector-goland
 
 USER root
 
-ARG GO_VERSIOIN=1.14.4
-
 COPY --from=golang /go.tar.gz go.tar.gz
 COPY --from=kubectl /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
 
@@ -32,7 +30,7 @@ RUN hd install linuxsuren/ks && \
 	hd install cli/cli && \
 	gh config set editor vim
 
-ENV GOPATH /home/projector-user/.go
+ENV GOPATH /root/.go
 ENV GOROOT /usr/local/go
 ENV GOPROXY https://goproxy.io
-ENV PATH $PATH:$GOROOT/bin
+ENV PATH $PATH:$GOROOT/bin:$GOPATH/bin
