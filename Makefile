@@ -9,10 +9,10 @@ push-idea-c:
 	docker push surenpi/kubesphere-idea-c
 
 helm-install:
-	helm install ks-goland ks-goland --set service.type=NodePort --set image.tag=latest
+	helm install jetbrains jetbrains --set service.type=NodePort --set image.tag=latest
 
 helm-uninstall:
-	helm delete ks-goland
+	helm delete jetbrains
 
 helm-package:
-	helm package ks-goland -d bin
+	helm package jetbrains -d bin

@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "ks-goland.fullname" . }}
+  name: {{ include "jetbrains.fullname" . }}
   labels:
-    {{- include "ks-goland.labels" . | nindent 4 }}
+    {{- include "jetbrains.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "ks-goland.fullname" . }}
+    name: {{ include "jetbrains.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

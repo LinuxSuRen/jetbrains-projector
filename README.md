@@ -1,6 +1,6 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/surenpi/kubesphere-goland.svg)](https://hub.docker.com/r/surenpi/kubesphere-goland/tags)
 
-Goland for KubeSphere
+JetBrains Projector
 
 # Get started
 
@@ -14,4 +14,4 @@ You can start it via docker or helm chat.
 
 ## Helm
 
-`helm install ks-goland ks-goland --set service.type=NodePort --set image.tag=latest`
+`helm install jetbrains jetbrains --set service.type=NodePort --set image.tag=latest`

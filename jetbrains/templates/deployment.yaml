@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "ks-goland.fullname" . }}
+  name: {{ include "jetbrains.fullname" . }}
   labels:
-    {{- include "ks-goland.labels" . | nindent 4 }}
+    {{- include "jetbrains.labels" . | nindent 4 }}
 spec:
 {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
 {{- end }}
   selector:
     matchLabels:
-      {{- include "ks-goland.selectorLabels" . | nindent 6 }}
+      {{- include "jetbrains.selectorLabels" . | nindent 6 }}
   template:
     metadata:
     {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
-        {{- include "ks-goland.selectorLabels" . | nindent 8 }}
+        {{- include "jetbrains.selectorLabels" . | nindent 8 }}
     spec:
       volumes:
         - name: docker
@@ -28,13 +28,13 @@ spec:
         {{- if .Values.persistent.enabled }}
         - name: jetbrains-userdata
           persistentVolumeClaim:
-            claimName: {{ include "ks-goland.fullname" . }}-userdata
+            claimName: {{ include "jetbrains.fullname" . }}-userdata
         {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "ks-goland.serviceAccountName" . }}
+      serviceAccountName: {{ include "jetbrains.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
