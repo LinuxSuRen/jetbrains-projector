@@ -2,7 +2,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ include "ks-goland.fullname" . }}-userdata
+  name: {{ include "jetbrains.fullname" . }}-userdata
   annotations:
     volume.beta.kubernetes.io/storage-provisioner: openebs.io/local
 spec:
