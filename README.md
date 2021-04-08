@@ -20,14 +20,12 @@ You can start it via docker or helm chat.
 
 ```
 helm install ideau jetbrains --set service.type=NodePort \
-    --set image.repository=surenpi/kubesphere-idea-u
-    --set image.tag=latest
+    --set image.repository=surenpi/kubesphere-idea-u,image.tag=latest
 ```
 
 ### Install IdeaC
 
 ```
 helm install ideac jetbrains --set service.type=NodePort \
-    --set image.repository=surenpi/kubesphere-idea-c
-    --set image.tag=latest
+    --set image.repository=surenpi/kubesphere-idea-c,image.tag=latest
 ```

@@ -1,9 +1,12 @@
 build:
 	docker build . -t surenpi/kubesphere-goland
 build-idea-c:
-	docker build . --build-arg IMAGE=projector-idea-c -t surenpi/kubesphere-idea-c -f Dockerfile-idea-u
+	docker build . --build-arg IMAGE=projector-idea-c -t surenpi/kubesphere-idea-c -f Dockerfile-idea
 build-idea-u:
-	docker build . --build-arg IMAGE=projector-idea-u -t surenpi/kubesphere-idea-u -f Dockerfile-idea-u
+	docker build . --build-arg IMAGE=projector-idea-u -t surenpi/kubesphere-idea-u -f Dockerfile-idea
+
+idea-c: build-idea-c push-idea-c
+idea-u: build-idea-u push-idea-u
 
 push:
 	docker push surenpi/kubesphere-goland
