@@ -15,3 +15,19 @@ You can start it via docker or helm chat.
 ## Helm
 
 `helm install jetbrains jetbrains --set service.type=NodePort --set image.tag=latest`
+
+### Install IdeaU
+
+```
+helm install ideau jetbrains --set service.type=NodePort \
+    --set image.repository=surenpi/kubesphere-idea-u
+    --set image.tag=latest
+```
+
+### Install IdeaC
+
+```
+helm install ideac jetbrains --set service.type=NodePort \
+    --set image.repository=surenpi/kubesphere-idea-c
+    --set image.tag=latest
+```

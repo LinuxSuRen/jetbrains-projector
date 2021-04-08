@@ -10,7 +10,7 @@ USER root
 COPY --from=golang /go.tar.gz go.tar.gz
 COPY --from=kubectl /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
 
-RUN apt-get update
+RUN apt-get update -y
 RUN apt-get install vim curl wget git gcc make -y && \
 	curl -L https://github.com/linuxsuren/http-downloader/releases/latest/download/hd-linux-amd64.tar.gz | tar xzv && \
 	mv hd /usr/local/bin && \
