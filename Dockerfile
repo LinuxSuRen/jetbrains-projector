@@ -34,3 +34,5 @@ ENV GOPATH /root/.go
 ENV GOROOT /usr/local/go
 ENV GOPROXY https://goproxy.io
 ENV PATH $PATH:$GOROOT/bin:$GOPATH/bin
+
+RUN go get -u golang.org/x/lint/golint
