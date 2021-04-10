@@ -8,11 +8,20 @@ You can start it via docker or helm chat.
 
 ## Docker
 
-`docker run -v /var/data/goland:/root -p 30000:8887 surenpi/kubesphere-goland`
+```
+docker run -v /var/run/docker.sock:/var/run/docker.sock -v /var/data/goland:/root \
+    -p 30000:8887 surenpi/kubesphere-goland
+```
 
-`docker run -v /var/data/idea-c:/root -p 30001:8887 surenpi/kubesphere-idea-c`
+```
+docker run -v /var/run/docker.sock:/var/run/docker.sock -v /var/data/idea-c:/root \
+    -p 30001:8887 surenpi/kubesphere-idea-c
+```
 
-`docker run -v /var/data/webstorm:/root -p 30002:8887 surenpi/kubesphere-webstorm`
+```
+docker run -v /var/run/docker.sock:/var/run/docker.sock-v /var/data/webstorm:/root \
+    -p 30002:8887 surenpi/kubesphere-webstorm
+```
 
 ## Helm
 
