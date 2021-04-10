@@ -1,0 +1,22 @@
+FROM bitnami/kubectl:1.16.15 as kubectl
+
+FROM registry.jetbrains.team/p/prj/containers/projector-webstorm
+
+USER root
+
+COPY --from=kubectl /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
+
+RUN apt-get update -y
+RUN apt-get install vim curl wget git make default-jdk maven -y && \
+	curl -L https://github.com/linuxsuren/http-downloader/releases/latest/download/hd-linux-amd64.tar.gz | tar xzv && \
+	mv hd /usr/local/bin && \
+    hd install linuxsuren/ks && \
+	rm -rf ks-linux-amd64.tar.gz && \
+	hd install cli/cli && \
+	gh config set editor vim && \
+    apt-get install apt-transport-https ca-certificates gnupg lsb-release -y && \
+	curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
+	echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+    $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+	apt-get update && \
+	apt-get install docker-ce-cli containerd.io
