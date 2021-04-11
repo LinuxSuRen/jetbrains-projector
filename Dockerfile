@@ -25,12 +25,18 @@ RUN apt-get install apt-transport-https ca-certificates gnupg lsb-release -y && 
 	apt-get update && \
 	apt-get install docker-ce-cli containerd.io
 
-RUN hd install linuxsuren/ks && \
-	rm -rf ks-linux-amd64.tar.gz && \
-	hd install cli/cli && \
-	gh config set editor vim
-
 ENV GOPATH /root/.go
 ENV GOROOT /usr/local/go
 ENV GOPROXY https://goproxy.io
 ENV PATH $PATH:$GOROOT/bin:$GOPATH/bin
+
+RUN hd install linuxsuren/ks && \
+	rm -rf ks-linux-amd64.tar.gz && \
+	hd install cli/cli && \
+	gh config set editor vim && \
+	mkdir -p test && \
+	curl -o test/upx.tar.xz https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz -L && \
+	cd test && tar xvf upx.tar.xz && cd .. && \
+	mv test/upx-3.96-amd64_linux/upx /usr/local/bin/upx && \
+	rm -rf test && \
+    go get -u golang.org/x/lint/golint
